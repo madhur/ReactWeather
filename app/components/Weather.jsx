@@ -5,7 +5,7 @@ var WeatherForm = require('./WeatherForm')
 var WeatherMessage = require('./WeatherMessage')
 
 var OpenWeatherMap =require('OpenWeatherMap');
-
+var ErrorModal = require('ErrorModal');
 
 var Weather = React.createClass({
 
@@ -32,7 +32,8 @@ var Weather = React.createClass({
 		// });
 
 		this.setState({
-			isLoading: true
+			isLoading: true,
+			errorMessage: undefined
 		})
 
 		OpenWeatherMap.getTemp(location).then(function(temp)
@@ -43,9 +44,11 @@ var Weather = React.createClass({
 			isLoading: false
 			});
 
-		}, function(error)
+		}, function(e)
 		{
-			alert(error);
+			alert(e);
+			errorMessage = e.message;
+
 			that.setState({
 			isLoading: false
 		})
@@ -58,6 +61,7 @@ var Weather = React.createClass({
 		var temp = this.state.temp;
 		var location = this.state.location;
 		var isLoading = this.state.isLoading;
+		var errorMessage = this.state.errorMessage;
 
 		function showLoadingMessage()
 		{
@@ -67,7 +71,7 @@ var Weather = React.createClass({
 
 			if(isLoading)
 			{
-				return (<h3>Loading Weather...</h3>);
+				return (<h3 className="text-center">Loading Weather...</h3>);
 			}
 			else if(temp && location)
 			{
@@ -78,11 +82,22 @@ var Weather = React.createClass({
 			
 		}
 
+		function renderError()
+		{
+			if(typeof errorMessage === 'string')
+			{
+				return (
+					<ErrorModal />
+					)
+			}
+		}
+
 		return (
 				<div>
-					<h3>Weather Component</h3>
+					<h1 className="text-center">Get Weather</h1>
 					<WeatherForm onSubmitHandle = {this.onSubmitHandleFunc}/>
 					{showLoadingMessage()}
+					{renderError()}
 				</div>
 			);
 
