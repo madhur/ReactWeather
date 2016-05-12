@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 
-// app.use(function(request, response, next){
+ app.use(function(request, response, next){
 
 	if(request.headers['x-forwarded-proto']=='https')
 	{
