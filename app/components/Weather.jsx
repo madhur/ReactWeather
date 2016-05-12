@@ -87,7 +87,7 @@ var Weather = React.createClass({
 			if(typeof errorMessage === 'string')
 			{
 				return (
-					<ErrorModal />
+					<ErrorModal message={errorMessage}/>
 					)
 			}
 		}

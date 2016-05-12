@@ -25939,7 +25939,7 @@
 
 			function renderError() {
 				if (typeof errorMessage === 'string') {
-					return React.createElement(ErrorModal, null);
+					return React.createElement(ErrorModal, { message: errorMessage });
 				}
 			}
 
@@ -26001,7 +26001,7 @@
 
 			function renderError() {
 				if (typeof errorMessage === 'string') {
-					return React.createElement(ErrorModal, null);
+					return React.createElement(ErrorModal, { message: errorMessage });
 				}
 			}
 
@@ -26038,6 +26038,17 @@
 		displayName: 'ErrorModal',
 
 
+		propTypes: {
+			title: React.PropTypes.string,
+			message: React.PropTypes.string.isRequired
+		},
+
+		getDefaultProps: function getDefaultProps() {
+			return {
+				title: "Error"
+			};
+		},
+
 		componentDidMount: function componentDidMount() {
 			var modal = new Foundation.Reveal($('#error-modal'));
 			modal.open();
@@ -26050,12 +26061,12 @@
 				React.createElement(
 					'h4',
 					null,
-					'Some Title'
+					this.props.title
 				),
 				React.createElement(
 					'p',
 					null,
-					'Our error message!'
+					this.props.message
 				),
 				React.createElement(
 					'p',
