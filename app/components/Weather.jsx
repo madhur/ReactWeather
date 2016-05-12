@@ -31,8 +31,6 @@ var Weather = React.createClass({
 		// 	temp: 88
 		// });
 
-		debugger;
-		
 		this.setState({
 			isLoading: true
 		})
