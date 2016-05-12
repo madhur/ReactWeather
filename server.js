@@ -3,16 +3,16 @@ var app = express();
 
 // app.use(function(request, response, next){
 
-// 	if(request.headers['x-forwarded-proto']=='http')
-// 	{
-// 		next();
-// 	}
-// 	else
-// 	{
-// 		response.redirect('http://' + request.hostname + request.url);
-// 	}
+	if(request.headers['x-forwarded-proto']=='https')
+	{
+		next();
+	}
+	else
+	{
+		response.redirect('http://' + request.hostname + request.url);
+	}
 
-// });
+});
 
 app.use(express.static('public'));
 
