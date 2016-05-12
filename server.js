@@ -1,18 +1,18 @@
 var express = require('express');
 var app = express();
 
-app.use(function(request, response, next){
+// app.use(function(request, response, next){
 
-	if(request.headers['x-forwarded-proto']=='http')
-	{
-		next();
-	}
-	else
-	{
-		response.redirect('http://' + request.hostname + request.url);
-	}
+// 	if(request.headers['x-forwarded-proto']=='http')
+// 	{
+// 		next();
+// 	}
+// 	else
+// 	{
+// 		response.redirect('http://' + request.hostname + request.url);
+// 	}
 
-});
+// });
 
 app.use(express.static('public'));
 
