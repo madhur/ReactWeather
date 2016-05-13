@@ -31,16 +31,24 @@ var WeatherForm = React.createClass({
 		}
 	},
 
+	clearCallback: function()
+	{
+		this.setState({
+			errorMessage: undefined
+		});
+	},
+
 	render: function()
 	{
 		var errorMessage = this.state.errorMessage;
+		var clearCallback = this.clearCallback;
 
 		function renderError()
 		{
 			if(typeof errorMessage === 'string')
 			{
 				return (
-					<ErrorModal message={errorMessage} />
+					<ErrorModal message={errorMessage} callback={clearCallback} />
 					)
 			}
 		}
