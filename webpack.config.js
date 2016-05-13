@@ -37,7 +37,8 @@ module.exports = {
 		root: __dirname,
 		alias: {
 			OpenWeatherMap: 'app/api/OpenWeatherMap.jsx',
-			ErrorModal: 'app/components/ErrorModal.jsx'
+			ErrorModal: 'app/components/ErrorModal.jsx',
+			applicationStyles: 'app/styles/app.scss'
 		},
 		
 		extensions: ['', '.jsx', '.js' ]

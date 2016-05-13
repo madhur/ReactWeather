@@ -33,7 +33,9 @@ var Weather = React.createClass({
 
 		this.setState({
 			isLoading: true,
-			errorMessage: undefined
+			errorMessage: undefined,
+			temp: undefined,
+			location: undefined
 		})
 
 		OpenWeatherMap.getTemp(location).then(function(temp)
@@ -54,6 +56,29 @@ var Weather = React.createClass({
 		})
 
 		});
+	},
+
+	componentDidMount: function()
+	{
+		var location = this.props.location.query.location;
+
+		if(location && location.length > 0)
+		{
+			this.onSubmitHandleFunc(location);
+			window.location.hash="#/";
+		}
+	},
+
+	componentWillReceiveProps: function(newProps)
+	{
+		var location = newProps.location.query.location;
+
+		if(location && location.length > 0)
+		{
+			this.onSubmitHandleFunc(location);
+			window.location.hash="#/";
+		}
+
 	},
 
 	render: function()
@@ -94,7 +119,7 @@ var Weather = React.createClass({
 
 		return (
 				<div>
-					<h1 className="text-center">Get Weather</h1>
+					<h1 className="text-center page-title">Get Weather</h1>
 					<WeatherForm onSubmitHandle = {this.onSubmitHandleFunc}/>
 					{showLoadingMessage()}
 					{renderError()}

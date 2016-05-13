@@ -114,6 +114,9 @@
 	__webpack_require__(263);
 	$(document).foundation();
 
+	// App css
+	__webpack_require__(267);
+
 	ReactDOM.render(React.createElement(
 		Router,
 		{ history: hashHistory },
@@ -25780,7 +25783,15 @@
 
 		onSearch: function onSearch(e) {
 			e.preventDefault();
-			alert('not yet wired up');
+			//alert('not yet wired up');
+			var searchLocation = this.refs.searchbox.value;
+			//alert(searchLocation);
+			var encodedLocation = encodeURIComponent(searchLocation);
+			if (searchLocation.length > 0) {
+				this.refs.searchbox.value = "";
+
+				window.location.hash = "#/?location=" + encodedLocation;
+			}
 		},
 
 		render: function render() {
@@ -25839,7 +25850,7 @@
 							React.createElement(
 								'li',
 								null,
-								React.createElement('input', { type: 'search', placeholder: 'Search weather' })
+								React.createElement('input', { type: 'search', ref: 'searchbox', placeholder: 'Search weather' })
 							),
 							React.createElement(
 								'li',
@@ -25896,7 +25907,9 @@
 
 			this.setState({
 				isLoading: true,
-				errorMessage: undefined
+				errorMessage: undefined,
+				temp: undefined,
+				location: undefined
 			});
 
 			OpenWeatherMap.getTemp(location).then(function (temp) {
@@ -25913,6 +25926,24 @@
 					isLoading: false
 				});
 			});
+		},
+
+		componentDidMount: function componentDidMount() {
+			var location = this.props.location.query.location;
+
+			if (location && location.length > 0) {
+				this.onSubmitHandleFunc(location);
+				window.location.hash = "#/";
+			}
+		},
+
+		componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+			var location = newProps.location.query.location;
+
+			if (location && location.length > 0) {
+				this.onSubmitHandleFunc(location);
+				window.location.hash = "#/";
+			}
 		},
 
 		render: function render() {
@@ -25948,7 +25979,7 @@
 				null,
 				React.createElement(
 					'h1',
-					{ className: 'text-center' },
+					{ className: 'text-center page-title' },
 					'Get Weather'
 				),
 				React.createElement(WeatherForm, { onSubmitHandle: this.onSubmitHandleFunc }),
@@ -26011,7 +26042,7 @@
 				React.createElement(
 					'form',
 					{ onSubmit: this.onSubmitHandle },
-					React.createElement('input', { type: 'text', ref: 'location', placeholder: 'Enter city name' }),
+					React.createElement('input', { type: 'search', ref: 'location', placeholder: 'Enter city name' }),
 					React.createElement(
 						'button',
 						{ className: 'button expanded hollow' },
@@ -27760,6 +27791,46 @@
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
+
+
+/***/ },
+/* 267 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(268);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(266)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./app.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 268 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(265)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".page-title {\n  margin-top: 2.5rem;\n  margin-bottom: 2.5rem; }\n\ninput[type=search] {\n  box-shadow: none; }\n", ""]);
+
+	// exports
 
 
 /***/ }
