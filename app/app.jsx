@@ -6,6 +6,8 @@ var Main = require('./components/Main')
 var Weather = require('./components/Weather')
 var About = require('./components/About')
 var Examples = require('./components/Examples')
+var SourceForm = require('./components/SourceForm')
+var TargetForm = require('./components/TargetForm')
 var Company = require('./components/Company')
 
 // Load foundation
@@ -23,6 +25,8 @@ ReactDOM.render(
 				<Route path="company" component={Company} >
 					<Route path=":companyId" component={Company} />
 				</Route>
+				<Route path="sourceform" component={SourceForm} />
+				<Route path="targetform" component={TargetForm} />
 				<IndexRoute component={Weather}/>
 			</Route>
 		</Router>

@@ -109,14 +109,16 @@
 	var Weather = __webpack_require__(238);
 	var About = __webpack_require__(265);
 	var Examples = __webpack_require__(266);
-	var Company = __webpack_require__(267);
+	var SourceForm = __webpack_require__(267);
+	var TargetForm = __webpack_require__(268);
+	var Company = __webpack_require__(269);
 
 	// Load foundation
-	__webpack_require__(268);
+	__webpack_require__(270);
 	$(document).foundation();
 
 	// App css
-	__webpack_require__(272);
+	__webpack_require__(274);
 
 	ReactDOM.render(React.createElement(
 		Router,
@@ -131,6 +133,8 @@
 				{ path: 'company', component: Company },
 				React.createElement(Route, { path: ':companyId', component: Company })
 			),
+			React.createElement(Route, { path: 'sourceform', component: SourceForm }),
+			React.createElement(Route, { path: 'targetform', component: TargetForm }),
 			React.createElement(IndexRoute, { component: Weather })
 		)
 	), document.getElementById('main'));
@@ -25930,6 +25934,19 @@
 	var Main = React.createClass({
 		displayName: 'Main',
 
+
+		getInitialState: function getInitialState() {
+			return {};
+		},
+
+		setmystate: function setmystate(newState) {
+			this.setState(newState);
+		},
+
+		getmystate: function getmystate() {
+			return this.state;
+		},
+
 		render: function render() {
 			return React.createElement(
 				'div',
@@ -25941,7 +25958,9 @@
 					React.createElement(
 						'div',
 						{ className: 'large-4 medium-6 columns small-centered' },
-						this.props.children
+						this.props.children && React.cloneElement(this.props.children, {
+							setParentState: this.setmystate, getParentState: this.getmystate
+						})
 					)
 				)
 			);
@@ -26031,6 +26050,24 @@
 								Link,
 								{ to: '/company', activeClassName: 'active', activeStyle: { fontWeight: 'bold' } },
 								'Company'
+							)
+						),
+						React.createElement(
+							'li',
+							null,
+							React.createElement(
+								Link,
+								{ to: '/sourceform', activeClassName: 'active', activeStyle: { fontWeight: 'bold' } },
+								'Source Form'
+							)
+						),
+						React.createElement(
+							'li',
+							null,
+							React.createElement(
+								Link,
+								{ to: '/targetform', activeClassName: 'active', activeStyle: { fontWeight: 'bold' } },
+								'Target Form'
 							)
 						)
 					)
@@ -27843,6 +27880,100 @@
 
 	'use strict';
 
+	var _reactRouter = __webpack_require__(175);
+
+	var React = __webpack_require__(8);
+	var ReactDOM = __webpack_require__(45);
+
+
+	var SourceForm = React.createClass({
+		displayName: 'SourceForm',
+
+
+		navigate: function navigate() {
+			var obj = {
+				1: this.refs.field1.value,
+				2: this.refs.field2.value,
+				3: this.refs.field3.value
+			};
+
+			this.props.setParentState(obj);
+			_reactRouter.hashHistory.push('/targetform');
+		},
+
+		render: function render() {
+			return React.createElement(
+				'div',
+				null,
+				React.createElement('input', { type: 'text', placeholder: 'Field1', ref: 'field1' }),
+				React.createElement('input', { type: 'text', placeholder: 'Field2', ref: 'field2' }),
+				React.createElement('input', { type: 'text', placeholder: 'Field3', ref: 'field3' }),
+				React.createElement(
+					'button',
+					{ className: 'button', onClick: this.navigate },
+					'Navigate to Target Form'
+				)
+			);
+		}
+
+	});
+
+	module.exports = SourceForm;
+
+/***/ },
+/* 268 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(8);
+	var ReactDOM = __webpack_require__(45);
+
+	var TargetForm = React.createClass({
+		displayName: 'TargetForm',
+
+
+		render: function render() {
+			var that = this;
+			var data;
+
+			function getdata() {
+				data = that.props.getParentState();
+				//alert(JSON.stringify(data));
+			}
+
+			return React.createElement(
+				'div',
+				null,
+				getdata(),
+				React.createElement(
+					'div',
+					null,
+					data['1']
+				),
+				React.createElement(
+					'div',
+					null,
+					data['2']
+				),
+				React.createElement(
+					'div',
+					null,
+					data['3']
+				)
+			);
+		}
+
+	});
+
+	module.exports = TargetForm;
+
+/***/ },
+/* 269 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	var React = __webpack_require__(8);
 	var ReactDOM = __webpack_require__(45);
 
@@ -27863,16 +27994,16 @@
 	module.exports = Company;
 
 /***/ },
-/* 268 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(269);
+	var content = __webpack_require__(271);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(271)(content, {});
+	var update = __webpack_require__(273)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -27889,10 +28020,10 @@
 	}
 
 /***/ },
-/* 269 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(270)();
+	exports = module.exports = __webpack_require__(272)();
 	// imports
 
 
@@ -27903,7 +28034,7 @@
 
 
 /***/ },
-/* 270 */
+/* 272 */
 /***/ function(module, exports) {
 
 	/*
@@ -27959,7 +28090,7 @@
 
 
 /***/ },
-/* 271 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -28211,16 +28342,16 @@
 
 
 /***/ },
-/* 272 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(273);
+	var content = __webpack_require__(275);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(271)(content, {});
+	var update = __webpack_require__(273)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -28237,10 +28368,10 @@
 	}
 
 /***/ },
-/* 273 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(270)();
+	exports = module.exports = __webpack_require__(272)();
 	// imports
 
 
