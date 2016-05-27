@@ -6,6 +6,7 @@ var Main = require('./components/Main')
 var Weather = require('./components/Weather')
 var About = require('./components/About')
 var Examples = require('./components/Examples')
+var Company = require('./components/Company')
 
 // Load foundation
 require('style!css!foundation-sites/dist/foundation.min.css')
@@ -19,6 +20,9 @@ ReactDOM.render(
 			<Route path="/" component={Main}>
 				<Route path="about" component={About} />
 				<Route path="examples" component={Examples} />
+				<Route path="company" component={Company} >
+					<Route path=":companyId" component={Company} />
+				</Route>
 				<IndexRoute component={Weather}/>
 			</Route>
 		</Router>

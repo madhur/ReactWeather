@@ -16,6 +16,12 @@ var Examples = React.createClass({
 					<li> 
 						<Link to='/?location=delhi'>Delhi, India</Link>
 					</li>
+					<li> 
+						<Link to='/company/1'>company Id 1</Link>
+					</li>
+					<li> 
+						<Link to='/company/2'>company Id 2</Link>
+					</li>
 				</ol>
 			</div>
 				
