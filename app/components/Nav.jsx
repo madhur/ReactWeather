@@ -38,6 +38,7 @@ var Nav = React.createClass({
 			      <li><Link to="/company" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Company</Link></li>
 			       <li><Link to="/sourceform" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Source Form</Link></li>
 			        <li><Link to="/targetform" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Target Form</Link></li>
+			        <li><Link to="/test" activeClassName="active" activeStyle={{fontWeight: 'bold'}}>Test</Link></li>
 			    </ul>
 			  </div>
 			  <div className="top-bar-right">

@@ -112,13 +112,14 @@
 	var SourceForm = __webpack_require__(267);
 	var TargetForm = __webpack_require__(268);
 	var Company = __webpack_require__(269);
+	var Test = __webpack_require__(270);
 
 	// Load foundation
-	__webpack_require__(270);
+	__webpack_require__(271);
 	$(document).foundation();
 
 	// App css
-	__webpack_require__(274);
+	__webpack_require__(275);
 
 	ReactDOM.render(React.createElement(
 		Router,
@@ -135,6 +136,9 @@
 			),
 			React.createElement(Route, { path: 'sourceform', component: SourceForm }),
 			React.createElement(Route, { path: 'targetform', component: TargetForm }),
+			React.createElement(Route, { path: 'test', component: Test }),
+			React.createElement(Route, { path: 'test/a', component: Test, key1: 'a' }),
+			React.createElement(Route, { path: 'test/b', component: Test, key1: 'b' }),
 			React.createElement(IndexRoute, { component: Weather })
 		)
 	), document.getElementById('main'));
@@ -26069,6 +26073,15 @@
 								{ to: '/targetform', activeClassName: 'active', activeStyle: { fontWeight: 'bold' } },
 								'Target Form'
 							)
+						),
+						React.createElement(
+							'li',
+							null,
+							React.createElement(
+								Link,
+								{ to: '/test', activeClassName: 'active', activeStyle: { fontWeight: 'bold' } },
+								'Test'
+							)
 						)
 					)
 				),
@@ -27997,13 +28010,96 @@
 /* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var React = __webpack_require__(8);
+	var ReactDOM = __webpack_require__(45);
+
+	var _require = __webpack_require__(175);
+
+	var Link = _require.Link;
+	var IndexLink = _require.IndexLink;
+
+
+	var Test = React.createClass({
+		displayName: 'Test',
+
+
+		render: function render() {
+			var val1 = this.props.route.key1;
+
+			function renderme() {
+				if (val1 == "a") {
+					return React.createElement(
+						'div',
+						{ id: 'a' },
+						'a'
+					);
+				} else if (val1 == "b") {
+					return React.createElement(
+						'div',
+						{ id: 'b' },
+						'b'
+					);
+				} else {
+					return React.createElement(
+						'div',
+						null,
+						React.createElement(
+							'div',
+							{ id: 'a' },
+							'a'
+						),
+						React.createElement(
+							'div',
+							{ id: 'b' },
+							'b'
+						)
+					);
+				}
+			}
+
+			return React.createElement(
+				'div',
+				null,
+				renderme(),
+				React.createElement('br', null),
+				React.createElement(
+					Link,
+					{ to: '/test' },
+					'All'
+				),
+				React.createElement('br', null),
+				React.createElement(
+					Link,
+					{ to: '/test/a' },
+					'A'
+				),
+				React.createElement('br', null),
+				React.createElement(
+					Link,
+					{ to: '/test/b' },
+					'B'
+				),
+				React.createElement('br', null)
+			);
+		}
+
+	});
+
+	module.exports = Test;
+
+/***/ },
+/* 271 */
+/***/ function(module, exports, __webpack_require__) {
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(271);
+	var content = __webpack_require__(272);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(273)(content, {});
+	var update = __webpack_require__(274)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -28020,10 +28116,10 @@
 	}
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(272)();
+	exports = module.exports = __webpack_require__(273)();
 	// imports
 
 
@@ -28034,7 +28130,7 @@
 
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports) {
 
 	/*
@@ -28090,7 +28186,7 @@
 
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -28342,16 +28438,16 @@
 
 
 /***/ },
-/* 274 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(275);
+	var content = __webpack_require__(276);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(273)(content, {});
+	var update = __webpack_require__(274)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -28368,10 +28464,10 @@
 	}
 
 /***/ },
-/* 275 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(272)();
+	exports = module.exports = __webpack_require__(273)();
 	// imports
 
 

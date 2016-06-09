@@ -9,6 +9,7 @@ var Examples = require('./components/Examples')
 var SourceForm = require('./components/SourceForm')
 var TargetForm = require('./components/TargetForm')
 var Company = require('./components/Company')
+var Test = require('./components/Test')
 
 // Load foundation
 require('style!css!foundation-sites/dist/foundation.min.css')
@@ -27,6 +28,10 @@ ReactDOM.render(
 				</Route>
 				<Route path="sourceform" component={SourceForm} />
 				<Route path="targetform" component={TargetForm} />
+				<Route path="test" component={Test} />
+				<Route path="test/a" component={Test} key1="a" />
+				<Route path="test/b" component={Test} key1="b" />
+				
 				<IndexRoute component={Weather}/>
 			</Route>
 		</Router>
